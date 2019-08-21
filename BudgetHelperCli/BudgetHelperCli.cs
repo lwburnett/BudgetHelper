@@ -1,11 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using Autofac;
 using BudgetHelper;
+using BudgetHelper.Api;
 using BudgetHelper.Common;
-using BudgetHelper.MapProviders;
-using BudgetHelper.Parsers;
 
 namespace BudgetHelperCli
 {
@@ -22,11 +20,7 @@ namespace BudgetHelperCli
 					args[1],
 					args[2]);
 
-				BuildIocContainer(config);
-
-				var generator = _container.Resolve<ITransactionsGenerator>();
-
-				var transactions = generator.Generate();
+				var transactions = BudgetHelperWrapper.GetTransactions(config);
 
 				var transactionCsvLines = transactions.
 					Select(t =>
@@ -47,53 +41,10 @@ namespace BudgetHelperCli
 			{
 				Console.WriteLine("Unhandled exception.");
 				Console.WriteLine(ex);
-				throw;
-			}
-			finally
-			{
-				_scope?.Dispose();
-				_container?.Dispose();
 			}
 
 			Console.WriteLine("Press any key to exit.");
 			Console.ReadKey();
 		}
-
-		#region Implementation
-
-		#region Fields
-
-		private static IContainer _container;
-		private static ILifetimeScope _scope;
-
-		#endregion
-
-		private static void BuildIocContainer(ConfigParameters config)
-		{
-			var builder = new ContainerBuilder();
-
-			builder.RegisterInstance(
-					ExportParserFactory.FromParameter(
-						config.Provider,
-						config.TransactionExportPath)).
-				As<IRawTransactionProvider>().
-				SingleInstance();
-
-			builder.RegisterInstance(new CsvMapProvider(config.DatabaseCsvPath)).
-				As<IMapProvider>().
-				SingleInstance();
-
-			builder.Register(c =>
-					new TransactionsGenerator(
-						c.Resolve<IMapProvider>(),
-						c.Resolve<IRawTransactionProvider>())).
-				As<ITransactionsGenerator>().
-				SingleInstance();
-
-			_container = builder.Build();
-			_scope = _container.BeginLifetimeScope();
-		}
-
-		#endregion
 	}
 }
