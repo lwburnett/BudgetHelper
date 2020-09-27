@@ -4,6 +4,7 @@
 	{
 		// ReSharper disable once IdentifierTypo
 		Citi,
-		Oxford
+		Oxford,
+		Chase
 	}
 }

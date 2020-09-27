@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.779
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30517.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetHelper", "BudgetHelper\BudgetHelper.csproj", "{E61C8754-832F-4699-9725-F9E686B25160}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetHelper.Common", "BudgetHelper.Common\BudgetHelper.Common.csproj", "{77E6A150-FC94-443C-8537-509EDAC5EA05}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetHelper.Api", "BudgetHelper.Api\BudgetHelper.Api.csproj", "{BECD1B8F-D5BA-4CB2-9DED-48C33F6F9330}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetHelperGui", "BudgetHelperGui\BudgetHelperGui.csproj", "{2158B6B6-684B-47C0-9FFC-E211ED32426C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{BECD1B8F-D5BA-4CB2-9DED-48C33F6F9330}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BECD1B8F-D5BA-4CB2-9DED-48C33F6F9330}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BECD1B8F-D5BA-4CB2-9DED-48C33F6F9330}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2158B6B6-684B-47C0-9FFC-E211ED32426C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2158B6B6-684B-47C0-9FFC-E211ED32426C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2158B6B6-684B-47C0-9FFC-E211ED32426C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2158B6B6-684B-47C0-9FFC-E211ED32426C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

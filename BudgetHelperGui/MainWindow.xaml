@@ -1,0 +1,63 @@
+﻿<Window x:Class="BudgetHelperGui.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:BudgetHelperGui"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"
+        d:DataContext="{d:DesignInstance vm:GuiViewModel, IsDesignTimeCreatable=True}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        
+        <TextBlock Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Budget Helper" FontSize="32" FontWeight="Bold"/>
+
+        <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" Margin="18" Text="Transaction File" FontSize="16"/>
+            <TextBox Grid.Row="0" Grid.Column="1" MinWidth="180" Height="24" Margin="18" FontSize="16" Text="{Binding TransactionPath, Mode=TwoWay}"/>
+            <Button Grid.Row="0" Grid.Column="2" Height="24" Width="48" Content="Browse" Command="{Binding OnBrowseForTransactionFile, Mode=OneWay}"/>
+
+            <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Margin="18" Text="Database File" FontSize="16"/>
+            <TextBox Grid.Row="1" Grid.Column="1" MinWidth="180" Height="24" Margin="18" FontSize="16" Text="{Binding DatabasePath, Mode=TwoWay}"/>
+            <Button Grid.Row="1" Grid.Column="2" Height="24" Width="48" Content="Browse" Command="{Binding OnBrowseForDatabaseFile, Mode=OneWay}"/>
+
+            <TextBlock Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" Text="Provider" Margin="18" FontSize="16"/>
+            <ComboBox 
+                Grid.Row="2" 
+                Grid.Column="1" 
+                MinWidth="180" 
+                Height="24" 
+                Margin="18"
+                FontSize="16" 
+                ItemsSource="{Binding Providers, Mode=OneTime}"
+                SelectedValue="{Binding SelectedProvider, Mode=TwoWay}"/>
+
+            <TextBlock Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" Margin="18" Text="Output Destination" FontSize="16"/>
+            <TextBox Grid.Row="3" Grid.Column="1" MinWidth="180" Height="24" Margin="18" FontSize="16" Text="{Binding OutputDestination, Mode=TwoWay}"/>
+            <Button Grid.Row="3" Grid.Column="2" Height="24" Width="48" Content="Browse" Command="{Binding OnBrowseForDestinationFile, Mode=OneWay}"/>
+
+        </Grid>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="2">
+            <TextBlock Margin="18,0" VerticalAlignment="Center" Text="{Binding StatusText, Mode=OneWay}" />
+            <Button Content="Generate" Width="64" Height="24" Margin="18,0" Command="{Binding OnGenerate, Mode=OneWay}"/>
+        </StackPanel>
+    </Grid>
+</Window>
