@@ -20,6 +20,10 @@ namespace BudgetHelper.Parsers
 					return new CitiRawTransactionProvider(filePath);
 				case Provider.Oxford:
 					throw new NotSupportedException();
+				case Provider.ChaseBank:
+					return new ChaseBankParser(filePath);
+				case Provider.ChaseCreditCard:
+					return new ChaseCreditCardParser(filePath);
 				default:
 					throw new ArgumentOutOfRangeException();
 			}

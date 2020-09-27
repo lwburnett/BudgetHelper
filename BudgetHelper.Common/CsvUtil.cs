@@ -9,6 +9,6 @@ namespace BudgetHelper.Common
 			string.Join(", ", pieces);
 
 		public static IEnumerable<string> Deserialize(string line) =>
-			line.Split(',').Select(p => p.Trim());
+			line.Split(new[] { ',' }, System.StringSplitOptions.RemoveEmptyEntries).Select(p => p.Trim());
 	}
 }

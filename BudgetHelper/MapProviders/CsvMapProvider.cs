@@ -26,6 +26,6 @@ namespace BudgetHelper.MapProviders
 		}
 
 
-		private string _filePath;
+		private readonly string _filePath;
 	}
 }

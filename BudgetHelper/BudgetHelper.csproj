@@ -48,6 +48,8 @@
     <Compile Include="Enums\Provider.cs" />
     <Compile Include="MapProviders\CsvMapProvider.cs" />
     <Compile Include="MapProviders\IMapProvider.cs" />
+    <Compile Include="Parsers\ChaseBankParser.cs" />
+    <Compile Include="Parsers\ChaseCreditCardParser.cs" />
     <Compile Include="Parsers\IExportParser.cs" />
     <Compile Include="ITransactionsGenerator.cs" />
     <Compile Include="Parsers\CitiExportParser.cs" />

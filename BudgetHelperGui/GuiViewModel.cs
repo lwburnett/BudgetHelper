@@ -19,7 +19,7 @@ namespace BudgetHelperGui
         {
             _transactionPath = string.Empty;
             _databasePath = string.Empty;
-            _selectedProvider = Provider.Chase;
+            _selectedProvider = Provider.ChaseBank;
             _outputDestination = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.Desktop), 
                 "BudgetHelperOutput.txt");
@@ -28,7 +28,7 @@ namespace BudgetHelperGui
             OnBrowseForTransactionFile = new RelayCommand(() => CommandWrapper("Browse for transaction file", () => BrowseCommand(f => TransactionPath = f )));
             OnBrowseForDatabaseFile = new RelayCommand(() => CommandWrapper("Browse for database file", () => BrowseCommand(f => DatabasePath = f)));
             OnBrowseForDestinationFile = new RelayCommand(() => CommandWrapper("Browse for destination file", () => BrowseCommand(f => OutputDestination = f)));
-            OnGenerate = new RelayCommand(() => CommandWrapper("Generate output", GenerateCommand), CanGenerate);
+            OnGenerate = new RelayCommand(() => CommandWrapper("Generate output", GenerateCommand));
         }
 
         #region Dependency Properties
@@ -94,7 +94,7 @@ namespace BudgetHelperGui
             var dlg = new OpenFileDialog 
             {
                 DefaultExt = ".txt",
-                Filter = "Text Files (*.txt) | *.txt | CSV Files (*.csv) | *.csv"
+                Filter = "Text Documents (*.txt)|*.txt|CSV Files (*.csv)|*.csv"
             };
 
             var result = dlg.ShowDialog();
@@ -108,29 +108,27 @@ namespace BudgetHelperGui
             OnSuccessCallback(dlg.FileName);
         }
 
-        private bool CanGenerate()
+        private void Validate()
         {
             if (string.IsNullOrWhiteSpace(TransactionPath))
-                return false;
+                throw new Exception("No Transaction Path given.");
             else if (!File.Exists(TransactionPath))
             { 
-                StatusText = $"{DateTime.Now} | Given Transaction Path does not exist.";
-                return false;
+                throw new Exception("Given Transaction Path does not exist.");
             }
 
             if (string.IsNullOrWhiteSpace(DatabasePath))
-                return false;
+                throw new Exception("No Database Path given.");
             else if (!File.Exists(DatabasePath))
             {
-                StatusText = $"{DateTime.Now} | Given DatabasePath Path does not exist.";
-                return false;
+                throw new Exception("Given Database Path does not exist.");
             }
-
-            return true;
         }
 
         private void GenerateCommand()
         {
+            Validate();
+
             var config = new ConfigParameters(
                     TransactionPath,
                     DatabasePath,

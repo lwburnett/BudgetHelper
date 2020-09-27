@@ -5,6 +5,7 @@
 		// ReSharper disable once IdentifierTypo
 		Citi,
 		Oxford,
-		Chase
+		ChaseBank,
+		ChaseCreditCard
 	}
 }
