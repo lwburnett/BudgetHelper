@@ -34,46 +34,43 @@ namespace BudgetHelperGui
         #region Dependency Properties
         public string TransactionPath
         {
-            get { return _transactionPath; }
-            set { Set(ref _transactionPath, value); }
+            get => _transactionPath;
+            set => Set(ref _transactionPath, value);
         }
 
         public string DatabasePath
         {
-            get { return _databasePath; }
-            set { Set(ref _databasePath, value); }
+            get => _databasePath;
+            set => Set(ref _databasePath, value);
         }
 
-        public IEnumerable<Provider> Providers
-        {
-            get { return Enum.GetValues(typeof(Provider)).Cast<Provider>(); }
-        }
+        public IEnumerable<Provider> Providers => Enum.GetValues(typeof(Provider)).Cast<Provider>();
 
         public Provider SelectedProvider
         {
-            get { return _selectedProvider; }
-            set { Set(ref _selectedProvider, value); }
+            get => _selectedProvider;
+            set => Set(ref _selectedProvider, value);
         }
 
         public string OutputDestination
         {
-            get { return _outputDestination; }
-            set { Set(ref _outputDestination, value); }
+            get => _outputDestination;
+            set => Set(ref _outputDestination, value);
         }
 
         public string StatusText
         {
-            get { return _statusText; }
-            set { Set(ref _statusText, value); }
+            get => _statusText;
+            set => Set(ref _statusText, value);
         }
         #endregion
 
         #region Commands
 
-        public ICommand OnBrowseForTransactionFile { get; private set; }
-        public ICommand OnBrowseForDatabaseFile { get; private set; }
-        public ICommand OnBrowseForDestinationFile { get; private set; }
-        public ICommand OnGenerate { get; private set; }
+        public ICommand OnBrowseForTransactionFile { get; }
+        public ICommand OnBrowseForDatabaseFile { get; }
+        public ICommand OnBrowseForDestinationFile { get; }
+        public ICommand OnGenerate { get; }
 
         #endregion
 
@@ -89,7 +86,7 @@ namespace BudgetHelperGui
             }
         }
 
-        private void BrowseCommand(Action<string> OnSuccessCallback)
+        private static void BrowseCommand(Action<string> iOnSuccessCallback)
         {
             var dlg = new OpenFileDialog 
             {
@@ -105,7 +102,7 @@ namespace BudgetHelperGui
             if (!result.Value)
                 throw new Exception("No result from dialog. Dialog perhaps canceled?");
 
-            OnSuccessCallback(dlg.FileName);
+            iOnSuccessCallback(dlg.FileName);
         }
 
         private void Validate()
