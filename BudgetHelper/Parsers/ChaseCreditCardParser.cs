@@ -20,6 +20,7 @@ namespace BudgetHelper.Parsers
 				ReadAllLines(_filePath).
 				Skip(1).
 				Select(l => CsvUtil.Deserialize(l).ToArray()).
+				Where(p => p[2] != "AUTOMATIC PAYMENT - THANK").
 				Select(p =>
 					new RawTransaction(
 						DateTime.Parse(p[0]),

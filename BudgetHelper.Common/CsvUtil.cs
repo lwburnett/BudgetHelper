@@ -8,7 +8,7 @@ namespace BudgetHelper.Common
 		public static string Serialize(IEnumerable<object> pieces) =>
 			string.Join(", ", pieces);
 
-		public static IEnumerable<string> Deserialize(string line) =>
-			line.Split(new[] { ',' }, System.StringSplitOptions.RemoveEmptyEntries).Select(p => p.Trim());
+		public static IEnumerable<string> Deserialize(string line, System.StringSplitOptions splitOptions = System.StringSplitOptions.RemoveEmptyEntries) =>
+			line.Split(new[] { ',' }, splitOptions).Select(p => p.Trim());
 	}
 }
